@@ -1,6 +1,7 @@
 package com.stu212306102.helloserver.exception;
 
 import com.stu212306102.helloserver.common.Result;
+import com.stu212306102.helloserver.common.ResultCode;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -12,13 +13,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public Result<String> handleRuntimeException(RuntimeException e) {
         // 返回统一错误响应，携带异常信息
-        return Result.error("服务器运行时异常：" + e.getMessage());
+        return Result.error(ResultCode.ERROR.getCode(),"服务器运行时异常：" + e.getMessage());
     }
 
     // 处理算术异常（如除数为0，用于测试）
     @ExceptionHandler(ArithmeticException.class)
     public Result<String> handleArithmeticException(ArithmeticException e) {
-        return Result.error("算术异常：" + e.getMessage());
+        return Result.error(ResultCode.ERROR.getCode(),"算术异常：" + e.getMessage());
     }
 
     // 处理所有异常（兜底）
