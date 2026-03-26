@@ -1,43 +1,30 @@
 package com.stu212306102.helloserver.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+/**
+ * 用户实体类（对应数据库 sys_user 表）
+ */
+@Data
+@TableName("sys_user")
 public class User {
-    private String name;
+
+    /**
+     * 主键 ID，自增
+     */
+    @TableId(type = IdType.AUTO)
     private Long id;
-    private Integer age;
 
-    // 无参构造方法
-    public User() {
-    }
+    /**
+     * 用户名
+     */
+    private String username;
 
-    // 全参构造方法
-    public User(String name, Long id, Integer age) {
-        this.name = name;
-        this.id = id;
-        this.age = age;
-    }
-
-    // Getter和Setter方法
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+    /**
+     * 密码
+     */
+    private String password;
 }
