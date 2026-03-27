@@ -7,20 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import com.stu212306102.helloserver.dto.UserDTO;
 import com.stu212306102.helloserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    // 1. 查询：根据ID获取用户信息，GET请求，路径参数id
-    @GetMapping("/{id}")
-    public Result<String> getUser(@PathVariable("id") Long id) {
-        String data = "查询成功，正在返回ID为" + id + "的用户信息";
-        return Result.success(data);
-    }
+
 
 //    // 2. 新增：添加用户，POST请求，接收JSON格式的User对象
 //    @PostMapping
@@ -36,12 +28,12 @@ public class UserController {
 //        return Result.success(data);
 //    }
 
-    // 4. 删除：根据ID删除用户，DELETE请求，路径参数id
-    @DeleteMapping("/{id}")
-    public Result<String> deleteUser(@PathVariable("id") Long id) {
-        String data = "删除成功,已移除ID为" + id + "的用户";
-        return Result.success(data);
-    }
+//    // 4. 删除：根据ID删除用户，DELETE请求，路径参数id
+//    @DeleteMapping("/{id}")
+//    public Result<String> deleteUser(@PathVariable("id") Long id) {
+//        String data = "删除成功,已移除ID为" + id + "的用户";
+//        return Result.success(data);
+//    }
 
     // 依赖注入 UserService 业务接口
     @Autowired
@@ -57,5 +49,12 @@ public class UserController {
     @PostMapping("/login")
     public Result<String> login(@RequestBody UserDTO userDTO) {
         return userService.login(userDTO);
+    }
+
+    // 1. 查询：根据ID获取用户信息，GET请求，路径参数id
+    @GetMapping("/{id}")
+    public Result<String> getUser(@PathVariable("id") Long id) {
+        String data = "查询成功，正在返回ID为" + id + "的用户信息";
+        return Result.success(data);
     }
 }
