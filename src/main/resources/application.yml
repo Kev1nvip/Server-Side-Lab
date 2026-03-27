@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres  # 若你的数据库名不是 lab_db，请修改
+    username: postgres
+    password: psw123  # 替换为你在 pgAdmin 中设置的数据库密码
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml  # Mapper XML 文件位置（可选）
+  type-aliases-package: com.stu.helloserver.entity  # 你的实体类包路径
+  configuration:
+    map-underscore-to-camel-case: true  # 下划线转驼峰命名
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增
