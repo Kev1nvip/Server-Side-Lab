@@ -49,4 +49,13 @@ public class UserServiceImpl implements UserService {
         String token = "Bearer " + JwtUtil.generateToken(userDTO.getUsername());
         return Result.success(token);
     }
+
+    @Override
+    public Result<String> getUserById(Long id) {
+        User user = userMapper.selectById(id);
+        if (user == null) {
+            return Result.error(ResultCode.USER_NOT_EXIST);
+        }
+        return Result.success(user.toString());
+    }
 }
