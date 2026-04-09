@@ -10,6 +10,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("实际请求方法：" + request.getMethod());
+        System.out.println("实际请求路径：" + request.getRequestURI());
         // 1. 获取请求方法与路径
         String method = request.getMethod();
         String uri = request.getRequestURI();

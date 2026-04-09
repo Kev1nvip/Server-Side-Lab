@@ -1,6 +1,7 @@
 package com.stu212306102.helloserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu212306102.helloserver.common.*;
 import com.stu212306102.helloserver.dto.UserDTO;
 import com.stu212306102.helloserver.entity.User;
@@ -48,5 +49,26 @@ public class UserServiceImpl implements UserService {
         // 生成 Token 并返回
         String token = "Bearer " + JwtUtil.generateToken(userDTO.getUsername());
         return Result.success(token);
+    }
+
+    @Override
+    public Result<String> getUserById(Long id) {
+        User user = userMapper.selectById(id);
+        if (user == null) {
+            return Result.error(ResultCode.USER_NOT_EXIST);
+        }
+        return Result.success(user.toString());
+    }
+
+    @Override
+    public Result<Object> getUserPage(Integer pageNum, Integer pageSize) {
+        // 1. 构建分页参数
+        Page<User> page = new Page<>(pageNum, pageSize);
+
+        // 2. 执行分页查询（无条件）
+        Page<User> resultPage = userMapper.selectPage(page, null);
+
+        // 3. 返回成功
+        return Result.success(resultPage);
     }
 }

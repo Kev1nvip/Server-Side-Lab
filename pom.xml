@@ -53,6 +53,12 @@
             <version>3.5.11</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>3.5.11</version>
+        </dependency>
+
         <!-- PostgreSQL 数据库驱动 -->
         <dependency>
             <groupId>org.postgresql</groupId>
