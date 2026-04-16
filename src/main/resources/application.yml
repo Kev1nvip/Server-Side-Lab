@@ -8,6 +8,12 @@ spring:
     username: postgres
     password: psw123  # 替换为你在 pgAdmin 中设置的数据库密码
 
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml  # Mapper XML 文件位置（可选）
   type-aliases-package: com.stu.helloserver.entity  # 你的实体类包路径

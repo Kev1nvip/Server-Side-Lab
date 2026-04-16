@@ -8,6 +8,8 @@ import com.stu212306102.helloserver.dto.UserDTO;
 import com.stu212306102.helloserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.stu212306102.helloserver.vo.UserDetailVO;
+import com.stu212306102.helloserver.entity.UserInfo;
 
 @RestController
 @RequestMapping("/api/users")
@@ -34,6 +36,23 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    // 查询详情（多表 + Redis）
+    @GetMapping("/{id}/detail")
+    public Result<UserDetailVO> getUserDetail(@PathVariable("id") Long userId) {
+        return userService.getUserDetail(userId);
+    }
+
+    // 更新详情
+    @PutMapping("/{id}/detail")
+    public Result<String> updateUserInfo(@PathVariable("id") Long userId, @RequestBody UserInfo userInfo) {
+        userInfo.setUserId(userId);
+        return userService.updateUserInfo(userInfo);
+    }
+
+    // 删除用户
+    @DeleteMapping("/{id}")
+    public Result<String> deleteUser(@PathVariable("id") Long userId) {
+        return userService.deleteUser(userId);
     // 分页查询接口
     @GetMapping("/page")
     public Result<Object> getUserPage(
