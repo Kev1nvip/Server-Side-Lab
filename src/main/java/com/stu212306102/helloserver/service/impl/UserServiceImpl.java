@@ -2,6 +2,7 @@ package com.stu212306102.helloserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu212306102.helloserver.common.*;
 import com.stu212306102.helloserver.dto.UserDTO;
 import com.stu212306102.helloserver.entity.User;
@@ -138,5 +139,15 @@ public class UserServiceImpl implements UserService {
         userInfoMapper.deleteById(userId);
         redisTemplate.delete(CACHE_KEY_PREFIX + userId);
         return Result.success("删除成功");
+    @Override
+    public Result<Object> getUserPage(Integer pageNum, Integer pageSize) {
+        // 1. 构建分页参数
+        Page<User> page = new Page<>(pageNum, pageSize);
+
+        // 2. 执行分页查询（无条件）
+        Page<User> resultPage = userMapper.selectPage(page, null);
+
+        // 3. 返回成功
+        return Result.success(resultPage);
     }
 }
