@@ -139,6 +139,7 @@ public class UserServiceImpl implements UserService {
         userInfoMapper.deleteById(userId);
         redisTemplate.delete(CACHE_KEY_PREFIX + userId);
         return Result.success("删除成功");
+    }
     @Override
     public Result<Object> getUserPage(Integer pageNum, Integer pageSize) {
         // 1. 构建分页参数
