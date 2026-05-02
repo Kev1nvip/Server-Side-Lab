@@ -9,6 +9,7 @@ import com.stu212306102.helloserver.entity.User;
 import com.stu212306102.helloserver.entity.UserInfo;
 import com.stu212306102.helloserver.mapper.UserMapper;
 import com.stu212306102.helloserver.mapper.UserInfoMapper;
+import com.stu212306102.helloserver.security.JwtUtil;
 import com.stu212306102.helloserver.service.UserService;
 import com.stu212306102.helloserver.vo.UserDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public Result<String> register(UserDTO userDTO) {
@@ -54,9 +58,10 @@ public class UserServiceImpl implements UserService {
         if (!userDTO.getPassword().equals(user.getPassword())) {
             return Result.error(ResultCode.PASSWORD_ERROR);
         }
-        // 生成 Token 并返回
-        String token = "Bearer " + JwtUtil.generateToken(userDTO.getUsername());
-        return Result.success(token);
+
+        // 2. 生成 JWT 并返回
+        String jwt = jwtUtil.generateToken(userDTO.getUsername());
+        return Result.success(jwt);
     }
 
     @Override

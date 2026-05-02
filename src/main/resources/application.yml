@@ -22,3 +22,8 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto  # 主键自增
+
+security:
+  jwt:
+    secret: demo-jwt-secret-key-for-spring-security-2026
+    expiration-millis: 7200000

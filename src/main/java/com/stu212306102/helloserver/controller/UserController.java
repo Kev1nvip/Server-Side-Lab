@@ -53,6 +53,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public Result<String> deleteUser(@PathVariable("id") Long userId) {
         return userService.deleteUser(userId);
+    }
     // 分页查询接口
     @GetMapping("/page")
     public Result<Object> getUserPage(
