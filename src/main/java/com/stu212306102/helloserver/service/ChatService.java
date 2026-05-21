@@ -1,5 +1,8 @@
 package com.stu212306102.helloserver.service;
 
+import com.stu212306102.helloserver.dto.ChatRequestDTO;
+import com.stu212306102.helloserver.vo.ChatResponseVO;
+
 public interface ChatService {
-    String chat(String message);
+    ChatResponseVO chat(ChatRequestDTO requestDTO);
 }
