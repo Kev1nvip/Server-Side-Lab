@@ -1,13 +1,17 @@
 package com.stu212306102.helloserver.interceptor;
 
-import com.stu212306102.helloserver.common.JwtUtil;
+import com.stu212306102.helloserver.security.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component // 建议加上，让 Spring 管理
 public class LoginInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -22,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         // 2. 校验 Token
         String token = authHeader.replace("Bearer ", "");
-        String username = JwtUtil.validateToken(token);
+        String username = jwtUtil.extractUsername(token);
         if (username == null) {
             return sendError(response, "Token 无效或已过期");
         }
